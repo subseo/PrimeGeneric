@@ -3,21 +3,16 @@ import {Button, GradiantSlider, InputSwitch, Slider} from "../../lib/index.ts";
 import {ref, watch} from "vue";
 
 const toggleState = ref(true)
-const value = ref(50)
-
-const colorFrom = ref('#ff3300')
-const colorTo = ref('#fff333')
+const sliderValue = ref(50)
 
 const colors = ref([
-  'hsl(' + value.value + ',100%,50%)',
-  'hsl(90,100%,50%)',
-  'hsl(90,100%,100%)',
-  'hsl(140,100%,50%)'
+  {"hsl": 'hsl(' + sliderValue.value + ',100%,50%)'},
+  {"hsl": 'hsl(90,100%,50%)'},
+  {"hsl": 'hsl(90,100%,100%)'},
 ])
 
-watch(value, () => {
-  //createGradiant()
-  colors.value[0] = 'hsl(' + value.value + ',100%,50%)'
+watch(sliderValue, () => {
+  colors.value[0].hsl = 'hsl(' + sliderValue.value + ',100%,50%)'
 })
 </script>
 
@@ -26,17 +21,27 @@ watch(value, () => {
     <Card>
       <template #title>Slider</template>
       <template #content>
-        {{ value }}
-        Slider: {{ value }}
         <div class="mb-8">
-          <Slider v-model="value"/>
+          <Slider v-model="sliderValue"/>
+          <div class="mt-2 font-bold">
+            {{ sliderValue }}
+          </div>
         </div>
-
-        <GradiantSlider v-model="value" v-model:colorFrom="colorFrom"
-                        v-model:colorTo="value" v-model:colors="colors" :max="255" :min="0"/>
-
       </template>
     </Card>
+
+    <Card>
+      <template #title>Gradiant Slider</template>
+      <template #content>
+        <div class="mb-8">
+          <GradiantSlider v-model:colors="colors" v-model:count="sliderValue" :max="255"/>
+          <div class="mt-2 font-bold">
+            {{ sliderValue }}
+          </div>
+        </div>
+      </template>
+    </Card>
+
 
     <Card>
       <template #title>Buttons</template>

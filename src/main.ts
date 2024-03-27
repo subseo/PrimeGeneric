@@ -2,7 +2,7 @@ import {createApp} from 'vue'
 import './style.css'
 import App from './App.vue'
 import './index.css'
-import {PrimeGeneric} from "../lib/main.ts";
+import {PrimeGeneric} from "../lib/main";
 
 
 const app = createApp(App);

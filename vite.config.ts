@@ -1,16 +1,15 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
-import dts from 'vite-plugin-dts'
 import {resolve} from 'path'
 
 export default defineConfig({
     build: {
+        outDir: './dist',
         copyPublicDir: false,
         lib: {
             entry: resolve(__dirname, 'lib/main.ts'),
             name: 'PrimeGeneric',
-            formats: ['es'],
-            fileName: 'prime-generic'
+            fileName: (format) => `${'prime-generic'}.${format}.js`
         },
         rollupOptions: {
             external: ['vue'],
@@ -21,10 +20,5 @@ export default defineConfig({
             }
         }
     },
-    plugins: [vue(),
-        dts({
-            include: ['lib'],
-            insertTypesEntry: true,
-            rollupTypes: true,
-        }),],
+    plugins: [vue()],
 })

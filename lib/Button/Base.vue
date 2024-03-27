@@ -14,7 +14,7 @@ const Props = defineProps(
 );
 
 const preset = {
-  root: ({props, context, parent}) => ({
+  root: ({props, context, parent}: any) => ({
     class: [
       'relative',
       // Alignments

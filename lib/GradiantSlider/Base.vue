@@ -1,30 +1,16 @@
-<script setup>
+<script lang="ts" setup>
 import Slider from 'primevue/slider';
 import {ref, watch} from "vue";
 
-
-const colorFrom = defineModel('colorFrom')
-const colorTo = defineModel('colorTo')
-const colors = defineModel('colors')
-
-
-const gradiant = ref()
-//gradiant.value = `linear-gradient(90deg, hsl(0,100%,50%), hsl(${colorTo.value},100%,50%))`
-
-const createGradiant = () => {
-  gradiant.value = `linear-gradient(90deg`
-  for (const color of colors.value) {
-    gradiant.value += ',' + color
+type Colors = [
+  {
+    hsl: string,
+    percent?: number
   }
-  gradiant.value += ")"
-}
+]
 
-createGradiant()
-
-watch(colors, (newColor) => {
-  createGradiant()
-  console.log(gradiant.value + newColor)
-})
+const count = defineModel<number | number[]>('count', {default: 0})
+const colors = defineModel<Colors>('colors', {required: true})
 
 defineOptions({
   inheritAttrs: false
@@ -32,6 +18,19 @@ defineOptions({
 
 defineProps();
 
+const gradiant = ref("")
+
+const createGradiant = () => {
+  gradiant.value = `linear-gradient(90deg`
+  for (const color of colors.value) {
+    gradiant.value += ',' + color.hsl
+  }
+  gradiant.value += ")"
+}
+
+watch(colors.value, () => createGradiant())
+
+createGradiant()
 
 const preset = {
   root: ({props}) => ({
@@ -152,12 +151,14 @@ const preset = {
 
 <template>
 
-  <Slider :class="$style.gradiant" :pt="preset" :ptOptions="{ mergeSections: false, mergeProps: false }"
-          v-bind="$attrs"/>
+  <Slider
+      v-model="count"
+      :class="$style.gradiant"
+      :pt="preset"
+      :ptOptions="{ mergeSections: false, mergeProps: false }"
+      v-bind="$attrs"
+  />
 
-  <button @click="colorTo = 44">test</button>
-
-  {{ colors }}
 </template>
 
 <style module>

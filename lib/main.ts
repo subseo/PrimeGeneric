@@ -1,5 +1,5 @@
 import type {App} from 'vue';
-import {Button, Card, GradiantSlider, InputSwitch, MenuBar, Slider} from "./index.ts";
+import {Button, Card, GradiantSlider, InputSwitch, MenuBar, Slider} from './index'
 import PrimeVue from 'primevue/config';
 
 const PrimeGeneric = {
@@ -17,4 +17,4 @@ const PrimeGeneric = {
     }
 };
 
-export {PrimeGeneric, InputSwitch, Card, Slider, GradiantSlider};
+export {PrimeGeneric, InputSwitch, Card, Slider, GradiantSlider, Button};
