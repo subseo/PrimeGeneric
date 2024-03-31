@@ -21,14 +21,17 @@ defineProps();
 const gradiant = ref("")
 
 const createGradiant = () => {
-  gradiant.value = `linear-gradient(90deg`
+  gradiant.value = `background: linear-gradient(90deg`
   for (const color of colors.value) {
     gradiant.value += ',' + color.hsl
   }
   gradiant.value += ")"
 }
 
-watch(colors.value, () => createGradiant())
+watch(colors.value, () => {
+  console.error("Test")
+  createGradiant()
+})
 
 createGradiant()
 
@@ -37,9 +40,9 @@ const preset = {
     class: [
       'relative',
       // Size
-      {'h-5 w-60 rounded': props.orientation === 'horizontal', 'w-1 h-56': props.orientation === 'vertical'},
+      {'h-20 w-60 rounded-sm': props.orientation === 'horizontal', 'w-1 h-56': props.orientation === 'vertical'},
       // Shape
-      'border-0',
+      'border-2 border-white shadow-sm',
       // Colors
 
       // States
@@ -60,7 +63,6 @@ const preset = {
         'w-full': props.orientation === 'vertical'
       },
       // Colors
-      'bg-primary-500 dark:bg-primary-400'
     ]
   }),
   handle: ({props}) => ({
@@ -131,7 +133,7 @@ const preset = {
       'rounded-full',
       'border-2',
       // Colors
-      'bg-surface-0 dark:bg-surface-600',
+      'bg-primary dark:bg-surface',
       'border-primary-500 dark:border-primary-400',
       // States
       'hover:bg-primary-500 hover:border-primary-500',
@@ -153,17 +155,14 @@ const preset = {
 
   <Slider
       v-model="count"
-      :class="$style.gradiant"
       :pt="preset"
       :ptOptions="{ mergeSections: false, mergeProps: false }"
+      :style="gradiant"
       v-bind="$attrs"
-  />
-
+  >
+  </Slider>
 </template>
 
 <style module>
-.gradiant {
-  background: rgb(2, 0, 36);
-  background: v-bind("gradiant")
-}
+
 </style>

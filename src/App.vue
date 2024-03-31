@@ -15,9 +15,13 @@ const darkMode = ref(false)
       }"
       class="flex h-full w-full">
 
-    <div class="flex  flex-col w-full h-full p-8 ">
-      <InputSwitch v-model="darkMode" label="Dark mode"/>
-      <ComponentList/>
+
+    <div class="flex flex-col w-full h-full ">
+      <div class="flex bg-surface p-4 justify-between">
+        <h1>Test</h1>
+        <InputSwitch v-model="darkMode" class="right" label="Dark mode"/>
+      </div>
+      <ComponentList class="p-8"/>
     </div>
   </div>
 </template>

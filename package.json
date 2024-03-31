@@ -6,28 +6,31 @@
   "main": "./dist/prime-generic.umd.js",
   "module": "./dist/prime-generic.es.js",
   "types": "./dist/types/main.d.ts",
+  "css": "global.css",
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && pnpm build:types",
+    "build": "vite build && pnpm build:css && pnpm build:types",
     "build:types": "vue-tsc --project tsconfig.build-types.json --declaration --emitDeclarationOnly --outDir dist/types ",
+    "build:css": "pnpm tailwindcss -i ./lib/index.css -o ./dist/globals.css",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/node": "^20.11.28",
+    "@types/node": "^20.12.2",
     "primevue": "^3.50.0",
     "vue": "^3.4.21"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
-    "autoprefixer": "^10.4.18",
-    "postcss": "^8.4.36",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.1.6",
-    "vite-plugin-dts": "^3.7.3",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "rollup-plugin-postcss": "^4.0.2",
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.3",
+    "vite": "^5.2.7",
+    "vite-plugin-dts": "^3.8.1",
     "vue-tsc": "^2.0.7"
   }
 }
