@@ -6,7 +6,6 @@
   "main": "./dist/prime-generic.umd.js",
   "module": "./dist/prime-generic.es.js",
   "types": "./dist/types/main.d.ts",
-  "css": "global.css",
   "files": [
     "dist"
   ],
@@ -14,7 +13,7 @@
     "dev": "vite",
     "build": "vite build && pnpm build:css && pnpm build:types",
     "build:types": "vue-tsc --project tsconfig.build-types.json --declaration --emitDeclarationOnly --outDir dist/types ",
-    "build:css": "pnpm tailwindcss -i ./lib/index.css -o ./dist/globals.css",
+    "build:css": "pnpm tailwindcss -i ./lib/index.css -o ./dist/tailwind.css && cat dist/*.css > dist/prime-generic.css && rm ./dist/style.css ./dist/tailwind.css",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -25,6 +24,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
     "autoprefixer": "^10.4.19",
+    "concat": "^1.0.3",
     "postcss": "^8.4.38",
     "rollup-plugin-postcss": "^4.0.2",
     "tailwindcss": "^3.4.3",

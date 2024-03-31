@@ -21,7 +21,7 @@ defineProps();
 const gradiant = ref("")
 
 const createGradiant = () => {
-  gradiant.value = `background: linear-gradient(90deg`
+  gradiant.value = `linear-gradient(90deg`
   for (const color of colors.value) {
     gradiant.value += ',' + color.hsl
   }
@@ -155,14 +155,17 @@ const preset = {
 
   <Slider
       v-model="count"
+      :class="$style.gradiant"
       :pt="preset"
       :ptOptions="{ mergeSections: false, mergeProps: false }"
-      :style="gradiant"
       v-bind="$attrs"
   >
   </Slider>
 </template>
 
 <style module>
-
+.gradiant {
+  background: rgb(2, 0, 36);
+  background: v-bind("gradiant");
+}
 </style>
