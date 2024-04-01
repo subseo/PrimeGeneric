@@ -10,7 +10,7 @@ defineOptions({
 
 const preset = {
   root: {
-    class: ['rounded', 'shadow', 'bg-surface dark:bg-surface-dark', 'text-content dark:text-content-dark']
+    class: ['rounded', 'shadow', 'bg-surface', 'text-content']
   },
   body: {
     class: 'p-5'
